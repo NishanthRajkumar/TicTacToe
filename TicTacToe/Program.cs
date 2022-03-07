@@ -9,6 +9,7 @@ namespace TicTacToe
             Console.WriteLine("==========Tic Tac Toe==========");
 
             TicTacToeGame.PlayerChoice();
+            TicTacToeGame.DisplayBoard();
 
             Console.ReadKey();
         }
