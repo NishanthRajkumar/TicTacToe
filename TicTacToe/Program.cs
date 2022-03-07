@@ -7,6 +7,7 @@ namespace TicTacToe
         static void Main(string[] args)
         {
             Console.WriteLine("==========Tic Tac Toe==========");
+            TicTacToeGame.DisplayBoard();
             Console.ReadKey();
         }
     }
