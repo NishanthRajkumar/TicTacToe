@@ -6,11 +6,12 @@ namespace TicTacToe
     {
         private static char player1Character;
         private static char player2Character;
-        private static char[] board = new char[10];
+        private static readonly char[] board = new char[10];
 
         static TicTacToeGame()
         {
             Array.Fill(board, ' ');
+            board[0] = '0';
         }
 
         public static void DisplayBoard()
@@ -32,10 +33,12 @@ namespace TicTacToe
                 choice = Console.ReadLine();
             } while (choice != "X" && choice != "O");
             player1Character = choice.ToCharArray()[0];
+
             if (choice == "X")
                 player2Character = 'O';
             else
                 player2Character = 'X';
+
             Console.WriteLine($"Player 1 character: {player1Character}");
             Console.WriteLine($"Player 2 character: {player2Character}");
         }
@@ -44,23 +47,32 @@ namespace TicTacToe
         {
             do
             {
-                DisplayBoard();
-
                 Console.WriteLine($"Player 1 turn ({player1Character}):");
                 PlayerInput(player1Character);
-
                 DisplayBoard();
 
                 if (WinCheck())
+                {
                     Console.WriteLine("Congratulations Player 1!");
+                    break;
+                }
+                else if (DrawCheck())
+                    break;
 
                 Console.WriteLine($"Player 2 turn ({player2Character}):");
                 PlayerInput(player2Character);
+                DisplayBoard();
 
-            } while (WinCheck() is false);
+                if (WinCheck())
+                {
+                    Console.WriteLine("Congratulations Player 2!");
+                    break;
+                }
 
-            DisplayBoard();
-            Console.WriteLine("Congratulations Player 2!");
+            } while (!WinCheck() && !DrawCheck());
+
+            if (DrawCheck())
+                Console.WriteLine("It is a Draw!!");
         }
 
         public static bool WinCheck()
@@ -107,6 +119,13 @@ namespace TicTacToe
             {
                 Console.WriteLine("Must enter integer value only!");
             }
+        }
+
+        public static bool DrawCheck()
+        {
+            if (Array.Exists(board, element => element == ' '))
+                return false;
+            return true;
         }
     }
 }
