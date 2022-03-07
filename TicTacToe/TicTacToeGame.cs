@@ -4,12 +4,8 @@ namespace TicTacToe
 {
     public static class TicTacToeGame
     {
-        // Declared Board of size 10. Ignoring 0 for user friendly App
         private static char[] board = new char[10];
 
-        /// <summary>
-        /// Initializes the <see cref="TicTacToeGame"/> class.
-        /// </summary>
         static TicTacToeGame()
         {
             Array.Fill(board, ' ');
